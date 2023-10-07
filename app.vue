@@ -22,18 +22,14 @@
                 grid grid-cols-3 gap-2
             "
         >
-            <button
-                class="
-                    border border-gray-200
-                    text-xl
-                    py-2
-                    rounded
-                    shadow
-                    hover:bg-slate-50
-                    active:shadow-inner
-                "
+            <CalcButton
+                title="AC"
                 @click="line = '0'"
-            >AC</button>
+            />
+            <CalcButton
+                title="C"
+                @click="cClick()"
+            />
         </div>
 
         <div
@@ -41,22 +37,14 @@
                 grid grid-cols-3 gap-2
             "
         >
-            <button
+            <CalcButton
                 v-for="i in [1,2,3,4,5,6,7,8,9,0]"
-                class="
-                    border border-gray-200
-                    text-xl
-                    py-2
-                    rounded
-                    shadow
-                    hover:bg-slate-50
-                    active:shadow-inner
-                "
+                :title="i"
                 :class="{
                     'col-start-2': i === 0,
                 }"
                 @click="digitClick(i)"
-            >{{ i }}</button>
+            />
         </div>
     </div>
 </div>
@@ -70,5 +58,12 @@ function digitClick(digit: number) {
         line.value = ''
     }
     line.value = line.value + digit.toString()
+}
+
+function cClick() {
+    line.value = line.value.substring(0, line.value.length - 1)
+    if(line.value == '') {
+        line.value = '0'
+    }
 }
 </script>
