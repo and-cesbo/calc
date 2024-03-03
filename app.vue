@@ -25,11 +25,7 @@
             <span>{{ line }}</span>
         </div>
 
-        <div
-            class="
-                grid grid-cols-3 gap-2
-            "
-        >
+        <div class="grid grid-cols-3 gap-2">
             <CalcButton
                 title="AC"
                 @click="acClick()"
@@ -40,11 +36,7 @@
             />
         </div>
 
-        <div
-            class="
-                grid grid-cols-3 gap-2
-            "
-        >
+        <div class="grid grid-cols-3 gap-2">
             <CalcButton
                 v-for="i in [1,2,3,4,5,6,7,8,9,0]"
                 :title="i"
@@ -55,11 +47,7 @@
             />
         </div>
 
-        <div
-            class="
-                grid grid-cols-4 gap-2
-            "
-        >
+        <div class="grid grid-cols-4 gap-2">
             <CalcButton
                 title="+"
                 @click="operatorClick('+')"
@@ -75,6 +63,14 @@
             <CalcButton
                 title="/"
                 @click="operatorClick('/')"
+            />
+        </div>
+
+        <div>
+            <CalcButton
+                class="w-full"
+                title="="
+                @click="calc()"
             />
         </div>
     </div>
@@ -110,5 +106,16 @@ function operatorClick(value: string) {
     stack.value = parseInt(line.value)
     line.value = '0'
     operator.value = value
+}
+
+function calc() {
+    switch(operator.value) {
+        case '+':
+            line.value = String(stack.value + parseInt(line.value))
+            break;
+
+        default:
+            break;
+    }
 }
 </script>
